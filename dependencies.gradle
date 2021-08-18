@@ -1,0 +1,15 @@
+ext {
+
+    // version
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 0
+
+    //Android
+    androidBuildToolsVersion = '29.0.3'
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 30
+    androidCompileSdkVersion = 30
+    kotlinVersion = '1.4.10'
+
+}

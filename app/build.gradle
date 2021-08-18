@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+
+
+kapt {
+    correctErrorTypes true
+}
+android {
+    compileSdk 31
+    buildFeatures {
+        viewBinding  true
+    }
+    dataBinding {
+        enabled true
+    }
+    defaultConfig {
+        applicationId "com.konet.konetpos"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    flavorDimensions 'environment'
+
+    productFlavors {
+        dev {
+            dimension = 'environment'
+            buildConfigField("String", "BASE_URL_PROD", '"https://giftoga.net/api/v1/"')
+            buildConfigField("String", "PREFERENCES_NAME", '"giftoga_preferences"')
+            buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"giftoga_preferences_permanent"')
+        }
+        production {
+            dimension = 'environment'
+            buildConfigField("String", "BASE_URL_PROD", '"https://giftoga.net/api/v1/"')
+            buildConfigField("String", "PREFERENCES_NAME", '"giftoga_preferences"')
+            buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"giftoga_preferences_permanent"')
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    // Androidx
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+
+    // Dagger hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+//    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.2.0"
+//    implementation "com.google.dagger:hilt-android:$hilt_version"
+//    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation "com.google.dagger:hilt-android:2.31.2-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
+
+
+    //Kotlin Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+
+
+    //Android Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
+
+    //Butter Knife
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    kapt           'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.2.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.2.0'
+
+
+    //Retrofit and OkHttp
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Timber and Hawk
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.orhanobut:hawk:2.0.1'
+    implementation 'com.wajahatkarim3.easyvalidation:easyvalidation-core:1.0.1'
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
+
+
+    // ViewModel and LiveData
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha03'
+    implementation "androidx.activity:activity-ktx:1.3.1"
+    implementation "androidx.fragment:fragment-ktx:1.3.6"
+
+
+    //Dimensions
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+}

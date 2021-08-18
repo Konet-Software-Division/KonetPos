@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Konet Pos</string>
+
+    <string name="purchase">Purchase</string>
+    <string name="vas">Vas</string>
+    <string name="unknown_error">An unknown error has occurred. Please try again later!</string>
+    <string name="system_error">Something went wrong. Please try again later</string>
+    <string name="amount">Amount</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="pay">Pay</string>
+    <string name="continue_">Continue</string>
+</resources>
