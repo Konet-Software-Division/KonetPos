@@ -3,14 +3,14 @@ package com.konet.konetpos
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.konet.konetpos.base.BaseActivity
+import com.konet.konetpos.ui.screen.base.BaseActivity
 import com.konet.konetpos.databinding.ActivityMainBinding
-import com.konet.konetpos.screen.login.Login
-import com.konet.konetpos.screen.purchase.Purchase
-import com.konet.konetpos.screen.vasdashboard.VasDashBoard
+import com.konet.konetpos.ui.screen.login.Login
+import com.konet.konetpos.ui.screen.purchase.Purchase
+import com.konet.konetpos.ui.screen.vasdashboard.VasDashBoard
 
 
-class MainActivity : BaseActivity<ActivityMainBinding,MainActivityViewModel>(), MainActivityView {
+class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(), MainActivityView {
     private lateinit var binding: ActivityMainBinding
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
     override fun getBindingVariable():Int = BR.viewModel;

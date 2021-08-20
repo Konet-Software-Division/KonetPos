@@ -1,4 +1,4 @@
-package com.konet.konetpos.screen.login
+package com.konet.konetpos.ui.screen.purchase
 
 import android.app.Activity
 import android.content.Intent
@@ -7,16 +7,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.konet.konetpos.BR
 import com.konet.konetpos.R
-import com.konet.konetpos.base.BaseActivity
-import com.konet.konetpos.databinding.LoginBinding
+import com.konet.konetpos.ui.screen.base.BaseActivity
+import com.konet.konetpos.databinding.PurchaseAmountBinding
 
 
-class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
-    private lateinit var binding: LoginBinding
-    private val loginViewModel: LoginViewModel by viewModels()
+class Purchase : BaseActivity<PurchaseAmountBinding, PurchaseViewModel>(), PurchaseView {
+    private lateinit var binding: PurchaseAmountBinding
+    private val purchaseViewModel: PurchaseViewModel by viewModels()
     override fun getBindingVariable():Int = BR.viewModel;
-    override fun getViewModel(): LoginViewModel = loginViewModel
-    override fun getLayoutId() = R.layout.login
+    override fun getViewModel(): PurchaseViewModel = purchaseViewModel
+    override fun getLayoutId() = R.layout.purchase_amount
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +52,11 @@ class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
     override fun initView() {
         //            val intent = Intent("com.globalaccelerex.utility")
 //           UserDetailsActivity.launch(intent)
-//        binding = LoginBinding.inflate(layoutInflater)
-//
-//        binding.continueBtn.setOnClickListener {
-//            ContinuePayment(binding.amountEdt.text.toString());
-//        }
+        binding = PurchaseAmountBinding.inflate(layoutInflater)
+
+        binding.continueBtn.setOnClickListener {
+            ContinuePayment(binding.amountEdt.text.toString());
+        }
     }
 
     override fun screenBack() {

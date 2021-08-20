@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.konet.konetpos.screen.login.LoginViewModel" />
+            type="com.konet.konetpos.ui.screen.login.LoginViewModel" />
     </data>
 
     <ScrollView
