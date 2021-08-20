@@ -1,4 +1,4 @@
-package com.example.konetpaypos.base
+package com.konet.konetpos.base
 
 import androidx.lifecycle.ViewModel
 import java.lang.ref.WeakReference

@@ -19,7 +19,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".purchase.Purchase"
+            android:name="com.konet.konetpos.screen.purchase.Purchase"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.konet.konetpos.screen.vasdashboard.VasDashBoard"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.konet.konetpos.screen.login.Login"
             android:exported="true">
         </activity>
     </application>

@@ -1,5 +1,6 @@
 package com.konet.konetpos.utils
 
+import com.konet.konetpos.network.response.WalletDetailsResponse
 import com.orhanobut.hawk.Hawk
 
 class HawkHelper {
@@ -22,17 +23,13 @@ class HawkHelper {
         return Hawk.get(REFRESH_TOKEN, "")
     }
 
-    fun setRefreshToken(refreshToken: String) {
-        Hawk.put(REFRESH_TOKEN, refreshToken)
+    fun getUserDetail(): WalletDetailsResponse? {
+        return Hawk.get(USER_DETAIL)
     }
 
-//    fun getUserDetail(): UserDetail? {
-//        return Hawk.get(USER_DETAIL)
-//    }
-//
-//    fun setUserDetail(userDetail: UserDetail) {
-//        Hawk.put(USER_DETAIL, userDetail)
-//    }
+    fun setUserDetail(walletDetailsResponse: WalletDetailsResponse) {
+        Hawk.put(USER_DETAIL, walletDetailsResponse)
+    }
 
     fun clearAll() {
         Hawk.deleteAll()

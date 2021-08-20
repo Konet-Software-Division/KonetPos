@@ -23,13 +23,12 @@ class LoginUseCase @Inject constructor(
             //refresh token
             val loginResponse = authRepository.signIn(request)
             hawkHelper.setToken(loginResponse.data.token)
-            hawkHelper.setRefreshToken(loginResponse.refreshToken)
 
             //get user detail
-//            val accountResponse = authRepository.getAccountDetails()
-//            accountResponse.data.user?.let {
-//                hawkHelper.setUserDetail(it)
-//            }
+            val accountResponse = authRepository.getAccountDetails()
+            accountResponse.let{
+                hawkHelper.setUserDetail(it)
+            }
 
             Result.Success(loginResponse)
         } catch (exception: Exception) {

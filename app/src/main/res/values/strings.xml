@@ -9,4 +9,9 @@
     <string name="enter_amount">Enter Amount</string>
     <string name="pay">Pay</string>
     <string name="continue_">Continue</string>
+    <string name="email_address">"enter email "</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="login_subtitle">Creating an account is easy, let\'s get you on board</string>
+    <string name="login_title">Welcome Back</string>
 </resources>

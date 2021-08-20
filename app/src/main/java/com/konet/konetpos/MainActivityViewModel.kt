@@ -1,7 +1,6 @@
 package com.konet.konetpos
 
-import com.example.konetpaypos.base.BaseViewModel
-import com.konet.konetpos.MainActivityView
+import com.konet.konetpos.base.BaseViewModel
 
 
 class MainActivityViewModel : BaseViewModel<MainActivityView>()

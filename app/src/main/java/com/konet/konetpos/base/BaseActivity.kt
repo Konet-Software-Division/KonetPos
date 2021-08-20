@@ -1,13 +1,17 @@
-package com.example.konetpaypos.base
+package com.konet.konetpos.base
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.google.android.material.snackbar.Snackbar
 import com.konet.konetpos.R
 import com.konet.konetpos.common.ErrorNotification
 import com.konet.konetpos.custom.GiftOgaProgressDialog
@@ -16,9 +20,10 @@ import org.xml.sax.ErrorHandler
 import timber.log.Timber
 import javax.inject.Inject
 
-abstract class BaseActivity< V : BaseViewModel<*>> : AppCompatActivity(),
+abstract class BaseActivity<B : ViewDataBinding,  V : BaseViewModel<*>> : AppCompatActivity(),
     BaseActivityView, ErrorNotification {
 
+    protected lateinit var viewDataBinding: B
     private lateinit var viewModel: V
     private lateinit var progressDialog: GiftOgaProgressDialog
 
@@ -63,9 +68,11 @@ abstract class BaseActivity< V : BaseViewModel<*>> : AppCompatActivity(),
     }
 
     private fun performBinding() {
-//        viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
         viewModel = getViewModel()
-
+        viewDataBinding.setVariable(getBindingVariable(), viewModel)
+        viewDataBinding.lifecycleOwner = this
+        viewDataBinding.executePendingBindings()
     }
 
     override fun onDestroy() {
@@ -117,7 +124,7 @@ abstract class BaseActivity< V : BaseViewModel<*>> : AppCompatActivity(),
     ) {
         when (workingType) {
             ErrorNotification.AfterNotify.LOGOUT -> {
-//                handleLogout()
+                handleLogout()
             }
             ErrorNotification.AfterNotify.SYSTEM_ERROR -> {
                 showSnackBar(getString(R.string.system_error))
@@ -129,20 +136,20 @@ abstract class BaseActivity< V : BaseViewModel<*>> : AppCompatActivity(),
     }
 
     override fun showSnackBar(resId: Int) {
-//        Snackbar.make(viewDataBinding.root, resId, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(viewDataBinding.root, resId, Snackbar.LENGTH_LONG).show()
     }
 
     override fun showSnackBar(message: String) {
-//        Snackbar.make(viewDataBinding.root, message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(viewDataBinding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
-//    private fun handleLogout() {
+    private fun handleLogout() {
 //        hawkHelper.clearAll()
 //        val intent = AuthenticationActivity.callingIntent(this, AuthenticationType.LOGIN.type)
 //        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 //        startActivity(intent)
 //        (this as MainActivity).overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
 //        (this as MainActivity).finish()
-//    }
+    }
 
 }

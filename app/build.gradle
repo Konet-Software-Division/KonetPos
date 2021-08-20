@@ -46,14 +46,14 @@ android {
         dev {
             dimension = 'environment'
             buildConfigField("String", "BASE_URL_PROD", '"https://giftoga.net/api/v1/"')
-            buildConfigField("String", "PREFERENCES_NAME", '"giftoga_preferences"')
-            buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"giftoga_preferences_permanent"')
+            buildConfigField("String", "PREFERENCES_NAME", '"konetpos_preferences"')
+            buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"konetpos_preferences_permanent"')
         }
         production {
             dimension = 'environment'
             buildConfigField("String", "BASE_URL_PROD", '"https://giftoga.net/api/v1/"')
-            buildConfigField("String", "PREFERENCES_NAME", '"giftoga_preferences"')
-            buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"giftoga_preferences_permanent"')
+            buildConfigField("String", "PREFERENCES_NAME", '"konetpos_preferences"')
+            buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"konetpos_preferences_permanent"')
         }
     }
 }

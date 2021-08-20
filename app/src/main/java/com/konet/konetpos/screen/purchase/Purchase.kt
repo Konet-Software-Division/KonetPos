@@ -1,31 +1,26 @@
-package com.konet.konetpos.purchase
+package com.konet.konetpos.screen.purchase
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import com.example.konetpaypos.base.BaseActivity
+import com.konet.konetpos.BR
+import com.konet.konetpos.R
+import com.konet.konetpos.base.BaseActivity
 import com.konet.konetpos.databinding.PurchaseAmountBinding
-import kotlinx.android.synthetic.main.purchase_amount.view.*
 
 
-class Purchase : BaseActivity<PurchaseViewModel>(), PurchaseView {
+class Purchase : BaseActivity<PurchaseAmountBinding,PurchaseViewModel>(), PurchaseView {
     private lateinit var binding: PurchaseAmountBinding
     private val purchaseViewModel: PurchaseViewModel by viewModels()
+    override fun getBindingVariable():Int = BR.viewModel;
+    override fun getViewModel(): PurchaseViewModel = purchaseViewModel
+    override fun getLayoutId() = R.layout.purchase_amount
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = PurchaseAmountBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-            val intent = Intent("com.globalaccelerex.utility")
-           UserDetailsActivity.launch(intent)
-
-        view.continue_btn.setOnClickListener {
-            ContinuePayment(view.amount_Edt.text.toString());
-        }
+        getViewModel().setView(this)
     }
 
     var UserDetailsActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -54,20 +49,14 @@ class Purchase : BaseActivity<PurchaseViewModel>(), PurchaseView {
         TODO("Not yet implemented")
     }
 
-    override fun getLayoutId(): Int {
-        TODO("Not yet implemented")
-    }
-
-    override fun getViewModel(): PurchaseViewModel = purchaseViewModel
-
-    override fun getBindingVariable(): Int {
-        TODO("Not yet implemented")
-    }
-
     override fun initView() {
-    }
+        //            val intent = Intent("com.globalaccelerex.utility")
+//           UserDetailsActivity.launch(intent)
+        binding = PurchaseAmountBinding.inflate(layoutInflater)
 
-    override fun logout() {
+        binding.continueBtn.setOnClickListener {
+            ContinuePayment(binding.amountEdt.text.toString());
+        }
     }
 
     override fun screenBack() {

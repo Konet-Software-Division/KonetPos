@@ -15,3 +15,19 @@ data class LoginData(
     @SerializedName("code") val code: Int,
     @SerializedName("token") val token: String
 ) : Parcelable
+
+//
+//@Parcelize
+//data class ProfileResponse(
+//    @SerializedName("data") val data: DataDetails
+//) : Parcelable
+//
+//@Parcelize
+//data class DataDetails(
+//    @SerializedName("user") val user: UserDetails
+//) : Parcelable
+//
+//@Parcelize
+//data class UserDetails(
+//    @SerializedName("user") val user: String
+//) : Parcelable
