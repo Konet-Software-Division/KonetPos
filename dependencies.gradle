@@ -4,8 +4,8 @@ ext {
     versionMajor = 1
     versionMinor = 0
     versionPatch = 0
-
-    //Android
+//
+//    //Android
     androidBuildToolsVersion = '29.0.3'
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 30

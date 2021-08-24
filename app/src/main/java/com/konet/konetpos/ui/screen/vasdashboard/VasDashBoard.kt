@@ -6,7 +6,9 @@ import com.konet.konetpos.BR
 import com.konet.konetpos.R
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.VasbashboardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 
 class VasDashBoard : BaseActivity<VasbashboardBinding, VasDashBoardViewModel>(), VasDashBoardView {
     private lateinit var binding: VasbashboardBinding

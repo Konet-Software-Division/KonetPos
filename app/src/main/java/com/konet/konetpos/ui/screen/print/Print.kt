@@ -11,7 +11,9 @@ import com.konet.konetpos.BR
 import com.konet.konetpos.R
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.PurchaseAmountBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 
 class Print : BaseActivity<PurchaseAmountBinding, PrintViewModel>(), PrintView {
     private lateinit var binding: PurchaseAmountBinding

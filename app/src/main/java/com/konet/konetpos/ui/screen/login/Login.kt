@@ -9,7 +9,9 @@ import com.konet.konetpos.BR
 import com.konet.konetpos.R
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.LoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 
 class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
     private lateinit var binding: LoginBinding

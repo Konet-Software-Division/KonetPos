@@ -14,8 +14,10 @@ import com.konet.konetpos.*
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.PurchaseAmountBinding
 import com.konet.konetpos.utils.AppUtils
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 
+@AndroidEntryPoint
 
 class Purchase : BaseActivity<PurchaseAmountBinding, PurchaseViewModel>(), PurchaseView {
     private var isOn: Boolean = false
