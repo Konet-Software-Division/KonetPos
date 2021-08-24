@@ -1,6 +1,6 @@
 package com.konet.konetpos.ui.screen.login
 
-import com.konet.konetpos.ui.screen.base.BaseView
+import com.konet.konetpos.ui.base.BaseView
 
 
 interface LoginView : BaseView {}

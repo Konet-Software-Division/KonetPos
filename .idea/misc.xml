@@ -7,14 +7,15 @@
         <entry key="app/src/main/res/drawable-v24/rounded_active_white_background.xml" value="0.12708333333333333" />
         <entry key="app/src/main/res/drawable-v24/rounded_background_selector.xml" value="0.228125" />
         <entry key="app/src/main/res/drawable-v24/rounded_white_background_10dp.xml" value="0.228125" />
+        <entry key="app/src/main/res/drawable/button_round_light_blue.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/drawable/edittext_light_blue.xml" value="0.228125" />
         <entry key="app/src/main/res/font/poppins_light.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/dialog_loading_progress.xml" value="0.1503623188405797" />
-        <entry key="app/src/main/res/layout/login.xml" value="0.1125" />
+        <entry key="app/src/main/res/layout/login.xml" value="0.430163044889651" />
         <entry key="app/src/main/res/layout/login_frag.xml" value="0.1796875" />
         <entry key="app/src/main/res/layout/purchase_amount.xml" value="0.22512562814070353" />
-        <entry key="app/src/main/res/layout/vasbashboard.xml" value="0.12239583333333333" />
+        <entry key="app/src/main/res/layout/vasbashboard.xml" value="0.1879258945292612" />
       </map>
     </option>
   </component>

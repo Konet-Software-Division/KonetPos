@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.konet.konetpos.BR
 import com.konet.konetpos.R
-import com.konet.konetpos.ui.screen.base.BaseActivity
+import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.VasbashboardBinding
 
 

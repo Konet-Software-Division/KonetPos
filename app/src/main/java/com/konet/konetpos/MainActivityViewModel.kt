@@ -1,6 +1,8 @@
 package com.konet.konetpos
 
-import com.konet.konetpos.ui.screen.base.BaseViewModel
+import com.konet.konetpos.ui.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class MainActivityViewModel : BaseViewModel<MainActivityView>()
+@HiltViewModel
+class MainActivityViewModel @Inject constructor() : BaseViewModel<MainActivityView>()

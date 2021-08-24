@@ -6,9 +6,18 @@ import com.orhanobut.hawk.Hawk
 class HawkHelper {
 
     companion object {
+        private const val LOGGEDIN = "loggedin"
         private const val TOKEN = "token"
         private const val REFRESH_TOKEN = "refresh_token"
         private const val USER_DETAIL = "user_detail"
+    }
+
+    fun getLoggedin(): Boolean {
+        return Hawk.get(LOGGEDIN, false)
+    }
+
+    fun setLoggedin(loggedin: Boolean) {
+        Hawk.put(LOGGEDIN, loggedin)
     }
 
     fun getToken(): String {
@@ -17,10 +26,6 @@ class HawkHelper {
 
     fun setToken(token: String) {
         Hawk.put(TOKEN, "Bearer $token")
-    }
-
-    fun getRefreshToken(): String {
-        return Hawk.get(REFRESH_TOKEN, "")
     }
 
     fun getUserDetail(): WalletDetailsResponse? {

@@ -23,6 +23,7 @@
     <color name="very_light_blue">#7D90AA</color>
     <color name="form_background_color">#F9F9F9</color>
     <color name="hint_text_color_light">#41092058</color>
+    <color name="inactive_button">#C2CCE8</color>
 
 
 

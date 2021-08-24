@@ -1,6 +1,5 @@
 package com.konet.konetpos
 
-import com.konet.konetpos.ui.screen.base.BaseView
+import com.konet.konetpos.ui.base.BaseView
 
-
-interface MainActivityView : BaseView {}
+interface MainActivityView: BaseView {}

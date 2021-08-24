@@ -4,22 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.konet.konetpos.ui.screen.vasdashboard.VasDashBoardViewModel" />
     </data>
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/_24sdp"
-        android:paddingEnd="@dimen/_24sdp"
-        android:background="@color/form_background_color"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:scrollbars="none">
+        android:background="@color/light_grey">
+
+        <TextView
+            android:id="@+id/amount_Txt"
+            style="@style/heebo_medium_19"
+            android:textSize="@dimen/_13sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:letterSpacing="0.1"
+            android:text="@string/account_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </ScrollView>
 </layout>
