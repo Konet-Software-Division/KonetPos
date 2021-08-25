@@ -46,13 +46,13 @@ android {
     productFlavors {
         dev {
             dimension = 'environment'
-            buildConfigField("String", "BASE_URL_PROD", '"https://giftoga.net/api/v1/"')
+            buildConfigField("String", "BASE_URL_PROD", '"http://80.248.15.54:9000/"')
             buildConfigField("String", "PREFERENCES_NAME", '"konetpos_preferences"')
             buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"konetpos_preferences_permanent"')
         }
         production {
             dimension = 'environment'
-            buildConfigField("String", "BASE_URL_PROD", '"https://giftoga.net/api/v1/"')
+            buildConfigField("String", "BASE_URL_PROD", '"http://80.248.15.54:9000/"')
             buildConfigField("String", "PREFERENCES_NAME", '"konetpos_preferences"')
             buildConfigField("String", "PREFERENCES_NAME_PERMANENT", '"konetpos_preferences_permanent"')
         }

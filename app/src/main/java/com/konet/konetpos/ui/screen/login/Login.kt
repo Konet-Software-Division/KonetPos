@@ -1,67 +1,97 @@
 package com.konet.konetpos.ui.screen.login
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.konet.konetpos.BR
 import com.konet.konetpos.R
+import com.konet.konetpos.common.ErrorHandler
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.LoginBinding
+import com.konet.konetpos.ui.screen.vasdashboard.VasDashBoard
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 
 class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
-    private lateinit var binding: LoginBinding
+
+    private var isValid: Boolean = false
+
     private val loginViewModel: LoginViewModel by viewModels()
     override fun getBindingVariable():Int = BR.viewModel;
     override fun getViewModel(): LoginViewModel = loginViewModel
     override fun getLayoutId() = R.layout.login
 
+    @Inject
+    lateinit var errorHandler: ErrorHandler
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getViewModel().setView(this)
+        validateButtonLogin()
     }
 
-    var UserDetailsActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-//            Log.i("utility", data!!.getStringExtra("data").toString())
-        }
-    }
+    @SuppressLint("CheckResult")
+    private fun validateButtonLogin() {
+        val phoneEdObservable = RxTextView.textChanges(viewDataBinding.phoneEdt)
+        val pinObservable = RxTextView.textChanges(viewDataBinding.pinEdt)
+        val isSignInEnabled: Observable<Boolean> = Observable.combineLatest(
+            phoneEdObservable,
+            pinObservable,
+            { phone, pin ->
+                phone.isNotEmpty() && pin.isNotEmpty()
+            })
 
-    fun ContinuePayment(amount: String) {
-        val jsonString = "{ \"transType\": \"PURCHASE\", \"amount\":\"$amount\",\"print\":\"true\" }"
-        val intent = Intent("com.globalaccelerex.transaction")
-        intent.putExtra("requestData", jsonString)
-
-       PaymentActivitys.launch(intent)
-    }
-
-    var PaymentActivitys = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-//            Log.i("rrrrsd", data!!.getStringExtra("data").toString())
+        isSignInEnabled.subscribe {
+            isValid = it
+            if (it) {
+                viewDataBinding.loginBtn.background =
+                    ContextCompat.getDrawable(applicationContext, R.drawable.rounded_button_selector)
+            } else {
+                viewDataBinding.loginBtn.background =
+                    ContextCompat.getDrawable(applicationContext, R.drawable.button_round_light_blue)
+            }
         }
     }
 
     override fun onErrorAfterDialogDismiss(error: Throwable, option: Any?) {
-        TODO("Not yet implemented")
+        Log.i("dddddd",error.message.toString())
     }
 
     override fun initView() {
-        //            val intent = Intent("com.globalaccelerex.utility")
-//           UserDetailsActivity.launch(intent)
-//        binding = LoginBinding.inflate(layoutInflater)
-//
-//        binding.continueBtn.setOnClickListener {
-//            ContinuePayment(binding.amountEdt.text.toString());
-//        }
+        viewDataBinding.phoneEdt.setText("08044444444")
+        viewDataBinding.pinEdt.setText("123456")
+
+        viewDataBinding.loginBtn.setOnClickListener {
+            if (isValid) {
+                loginViewModel.doLogin(
+                    phone = viewDataBinding.phoneEdt.text.toString(),
+                    pin = viewDataBinding.pinEdt.text.toString(),
+                    device = viewDataBinding.phoneEdt.text.toString()
+                )
+            }
+        }
+
+    }
+
+    override fun loginSuccess() {
+        val intent = Intent(this, VasDashBoard::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
     }
 
     override fun screenBack() {
+        TODO("Not yet implemented")
     }
 
 

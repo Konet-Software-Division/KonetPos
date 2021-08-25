@@ -48,30 +48,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
-                android:id="@+id/emailEdt"
+                android:id="@+id/phoneEdt"
                 style="@style/standard_text_field"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:paddingStart="@dimen/_12sdp"
                 android:paddingEnd="@dimen/_16sdp"
-                android:hint="@string/email_address"
+                android:hint="@string/enter_phonenumber"
                 android:textColorHint="@color/hint_text_color_light"
                 app:layout_constraintTop_toBottomOf="@+id/please_select_an_account"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="Autofill,LabelFor" />
 
             <EditText
-                android:id="@+id/passwordEdt"
+                android:id="@+id/pinEdt"
                 style="@style/standard_text_field"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:inputType="textPassword"
+                android:inputType="numberPassword"
                 android:paddingStart="@dimen/_12sdp"
                 android:paddingEnd="@dimen/_16sdp"
-                android:hint="@string/password"
+                android:hint="@string/enter_pin"
                 android:textColorHint="@color/hint_text_color_light"
-                app:layout_constraintTop_toBottomOf="@+id/emailEdt"
+                app:layout_constraintTop_toBottomOf="@+id/phoneEdt"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="Autofill,LabelFor" />
 
@@ -89,7 +89,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordEdt" />
+                app:layout_constraintTop_toBottomOf="@+id/pinEdt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

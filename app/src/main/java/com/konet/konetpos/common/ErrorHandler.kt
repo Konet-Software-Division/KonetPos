@@ -26,27 +26,27 @@ class ErrorHandler @Inject constructor() {
         when (throwable) {
             is ApiException -> {
                 val errorResponse = gson.fromJson(throwable.message, ErrorResponse::class.java)
-                when (errorResponse.status) {
+                when (errorResponse.code) {
                     HttpURLConnection.HTTP_UNAUTHORIZED -> {
                         if (errorResponse.message != null &&
-                            (errorResponse.message.isNotEmpty() || errorResponse.message == "Bad credentials.")
+                            (errorResponse.message.isNotEmpty() || errorResponse.message == "Unauthorized")
                         ) {
                             notification?.notifyError(errorResponse.message, throwable, option)
                         } else {
                             handleErrorForbidden(notification)
                         }
                     }
-                    HttpURLConnection.HTTP_BAD_REQUEST -> {
-                        if (errorResponse.data?.errors?.message != null && errorResponse.data.errors.message.isNotEmpty()) {
-                            notification?.notifyError(errorResponse.data.errors.message, throwable, option)
-                        } else {
-                            if (errorResponse.message == "Expired JWT Token") {
-                                handleErrorForbidden(notification)
-                            } else {
-                                notification?.notifyError(errorResponse.message!!, throwable, option)
-                            }
-                        }
-                    }
+//                    HttpURLConnection.HTTP_BAD_REQUEST -> {
+//                        if (errorResponse.data?.errors?.message != null && errorResponse.data.errors.message.isNotEmpty()) {
+//                            notification?.notifyError(errorResponse.data.errors.message, throwable, option)
+//                        } else {
+//                            if (errorResponse.message == "Expired JWT Token") {
+//                                handleErrorForbidden(notification)
+//                            } else {
+//                                notification?.notifyError(errorResponse.message!!, throwable, option)
+//                            }
+//                        }
+//                    }
                     HttpURLConnection.HTTP_FORBIDDEN -> {
                         if (errorResponse.message == "Expired JWT Token") {
                             handleErrorForbidden(notification)

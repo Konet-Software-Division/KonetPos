@@ -14,15 +14,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.konet.konetpos.R
 import com.konet.konetpos.common.ErrorNotification
 import com.konet.konetpos.custom.GiftOgaProgressDialog
-import com.konet.konetpos.utils.HawkHelper
-import org.xml.sax.ErrorHandler
+import com.konet.konetpos.databinding.ActivityMainBinding
 import timber.log.Timber
-import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewDataBinding,  V : BaseViewModel<*>> : AppCompatActivity(),
     BaseActivityView, ErrorNotification {
 
-    private lateinit var viewDataBinding: B
+    lateinit var viewDataBinding: B
     private lateinit var viewModel: V
     private lateinit var progressDialog: GiftOgaProgressDialog
 
@@ -67,6 +65,7 @@ abstract class BaseActivity<B : ViewDataBinding,  V : BaseViewModel<*>> : AppCom
     }
 
     private fun performBinding() {
+
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
         viewModel = getViewModel()
         viewDataBinding.setVariable(getBindingVariable(), viewModel)

@@ -12,7 +12,9 @@
     <string name="email_address">"enter email "</string>
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
-    <string name="login_subtitle">Creating an account is easy, let\'s get you on board</string>
+    <string name="login_subtitle">Login to your Konetpay account</string>
     <string name="login_title">Welcome Back</string>
     <string name="account_name">Account Name:</string>
+    <string name="enter_phonenumber">enter phonenumber</string>
+    <string name="enter_pin">enter pin</string>
 </resources>

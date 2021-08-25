@@ -23,7 +23,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
     @Inject
     lateinit var hawkHelper: HawkHelper
 
-    private lateinit var binding: ActivityMainBinding
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
     override fun getBindingVariable():Int = BR.viewModel;
     override fun getViewModel(): MainActivityViewModel = mainActivityViewModel
@@ -41,15 +40,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 
 
     override fun initView() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        binding.purchaseBtn.setOnClickListener {
+        viewDataBinding.purchaseBtn.setOnClickListener {
             val intent = Intent(this, Purchase::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
         }
-        binding.vasBtn.setOnClickListener {
+        viewDataBinding.vasBtn.setOnClickListener {
             if (hawkHelper.getLoggedin()) {
                 val intent = Intent(this, VasDashBoard::class.java)
                 startActivity(intent)

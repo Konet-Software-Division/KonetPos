@@ -13,7 +13,7 @@ import retrofit2.http.POST
 interface API {
 
     /***************** Authentication *****************/
-    @POST("token")
+    @POST("users_service/api/v1/auth/login")
     suspend fun signIn(@Body request: LoginRequest): Response<LoginResponse>
 
     @GET("token")
