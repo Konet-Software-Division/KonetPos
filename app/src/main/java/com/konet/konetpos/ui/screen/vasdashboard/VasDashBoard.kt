@@ -9,8 +9,8 @@ import com.konet.konetpos.databinding.VasbashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-
 class VasDashBoard : BaseActivity<VasbashboardBinding, VasDashBoardViewModel>(), VasDashBoardView {
+
     private lateinit var binding: VasbashboardBinding
     private val vasDashBoardViewModel: VasDashBoardViewModel by viewModels()
     override fun getViewModel(): VasDashBoardViewModel = vasDashBoardViewModel

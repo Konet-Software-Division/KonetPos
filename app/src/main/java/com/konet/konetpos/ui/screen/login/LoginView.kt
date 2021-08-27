@@ -5,4 +5,6 @@ import com.konet.konetpos.ui.base.BaseView
 
 interface LoginView : BaseView {
     fun loginSuccess()
+    fun loginFailed(mess: String)
+
 }

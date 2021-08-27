@@ -80,7 +80,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/loginBtn"
                 style="@style/button_round"
-                android:background="@drawable/button_blue_filled"
+                android:background="@drawable/button_round_dark_blue"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_46sdp"
                 android:layout_marginTop="@dimen/_20ssp"

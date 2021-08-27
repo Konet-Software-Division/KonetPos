@@ -1,13 +1,12 @@
 package com.konet.konetpos.ui.screen.login
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.konet.konetpos.BR
 import com.konet.konetpos.R
@@ -15,9 +14,9 @@ import com.konet.konetpos.common.ErrorHandler
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.databinding.LoginBinding
 import com.konet.konetpos.ui.screen.vasdashboard.VasDashBoard
+import com.konet.konetpos.utils.AppUtils
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -70,7 +69,7 @@ class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
 
     override fun initView() {
         viewDataBinding.phoneEdt.setText("08044444444")
-        viewDataBinding.pinEdt.setText("123456")
+        viewDataBinding.pinEdt.setText("1234567")
 
         viewDataBinding.loginBtn.setOnClickListener {
             if (isValid) {
@@ -88,6 +87,10 @@ class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
         val intent = Intent(this, VasDashBoard::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
+    }
+
+    override fun loginFailed(mess: String) {
+        AppUtils().SnackbarFailed(viewDataBinding.root, mess)
     }
 
     override fun screenBack() {

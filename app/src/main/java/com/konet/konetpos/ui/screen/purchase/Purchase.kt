@@ -7,9 +7,11 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.konet.konetpos.*
+import com.konet.konetpos.databinding.ActivityMainBinding
 import com.konet.konetpos.databinding.PurchaseBinding
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.utils.AppUtils
@@ -17,6 +19,9 @@ import io.reactivex.Observable
 
 
 class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseView {
+
+
+
     private var isOn: Boolean = false
     private var isValid: Boolean = false
     private lateinit var binding: PurchaseBinding
@@ -25,6 +30,7 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
     override fun getViewModel(): PurchaseViewModel = purchaseViewModel
     override fun getLayoutId() = R.layout.purchase
     var MerchantName: String = ""
+
 
     var JSaa="{\n" +
             "    \"Receipt\": [{\n" +
@@ -86,18 +92,41 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
             "        "
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getViewModel().setView(this)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.purchase)
+
+        // Assign the component to a property in the binding class.
+        binding.setLifecycleOwner(this)
+
+        binding.viewModel = purchaseViewModel
+
+        binding.continueBtn.setOnClickListener {
+            ContinuePayment(binding.amountEdt.text.toString());
+        }
+//        binding.purchaseBtn.setOnClickListener {
+//            val intent = Intent(this, Purchase::class.java)
+//            startActivity(intent)
+//            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
+//        }
+//        binding = DataBindingUtil.setContentView(this, R.layout.purchase)
+//
+//
+//        // Assign the component to a property in the binding class.
+//        binding.setLifecycleOwner(this)
+//
+//        binding.viewModel = purchaseViewModel
+//        getViewModel().setView(this)
     }
 
-    var UserDetailsActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                MerchantName =
-                    AppUtils().getJsonMap(result.data!!, "data").get("MerchantName").toString();
-
-            }
-        }
+//    var UserDetailsActivity =
+//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//            if (result.resultCode == Activity.RESULT_OK) {
+//                val data: Intent? = result.data
+//                MerchantName =
+//                    AppUtils().getJsonMap(result.data!!, "data").get("MerchantName").toString();
+//
+//            }
+//        }
 
     var SettingsActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -155,7 +184,7 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
                     val jsonString = buyGiftcardRequest.toString()
 
                     Snackbar.make(
-                        viewDataBinding.root,
+                        binding.root,
                         "Yes print",
                         Snackbar.LENGTH_LONG
                     ).show()
@@ -168,7 +197,7 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
 
                 } else {
                     Snackbar.make(
-                        viewDataBinding.root,
+                        binding.root,
                         MapData.get("message").toString().toString(),
                         Snackbar.LENGTH_LONG
                     ).show()
@@ -204,13 +233,11 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
     }
 
     override fun initView() {
-        val intent = Intent("com.globalaccelerex.utility")
-        UserDetailsActivity.launch(intent)
+//        val intent = Intent("com.globalaccelerex.utility")
+//        UserDetailsActivity.launch(intent)
 
 
-        viewDataBinding.continueBtn.setOnClickListener {
-            ContinuePayment(viewDataBinding.amountEdt.text.toString());
-        }
+
         validateButtonLogin()
     }
 
@@ -219,8 +246,8 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
 
     @SuppressLint("CheckResult")
     private fun validateButtonLogin() {
-        val amountEdtObservable = RxTextView.textChanges(viewDataBinding.amountEdt)
-        val amountEdtObservabl = RxTextView.textChanges(viewDataBinding.amountEdt)
+        val amountEdtObservable = RxTextView.textChanges(binding.amountEdt)
+        val amountEdtObservabl = RxTextView.textChanges(binding.amountEdt)
         val isSignInEnabled: Observable<Boolean> = Observable.combineLatest(
             amountEdtObservable,amountEdtObservabl,
             { amount,am ->
@@ -230,10 +257,10 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
         isSignInEnabled.subscribe {
             isValid = it
             if (it) {
-                viewDataBinding.continueBtn.background =
+                binding.continueBtn.background =
                     ContextCompat.getDrawable(applicationContext, R.drawable.rounded_button_selector)
             } else {
-                viewDataBinding.continueBtn.background =
+                binding.continueBtn.background =
                     ContextCompat.getDrawable(applicationContext, R.drawable.button_round_light_blue)
             }
         }

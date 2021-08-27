@@ -3,6 +3,7 @@ package com.konet.konetpos.network
 import com.konet.konetpos.utils.util.ApiException
 import org.json.JSONException
 import org.json.JSONObject
+import retrofit2.HttpException
 import retrofit2.Response
 
 abstract class SafeApiRequest {
@@ -20,10 +21,11 @@ abstract class SafeApiRequest {
                 } catch (e: JSONException) {
                 }
                 message.append("\n")
-                throw ApiException(error)
+//                throw HttpException(error)
+
             }
             message.append("Error Code: ${response.code()}")
-            throw ApiException(message.toString())
+            throw HttpException(response)
         }
     }
 }
