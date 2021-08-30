@@ -1,6 +1,5 @@
 package com.konet.konetpos.network
 
-import com.konet.konetpos.utils.util.ApiException
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException

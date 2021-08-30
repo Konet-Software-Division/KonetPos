@@ -69,7 +69,7 @@ class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
 
     override fun initView() {
         viewDataBinding.phoneEdt.setText("08044444444")
-        viewDataBinding.pinEdt.setText("1234567")
+        viewDataBinding.pinEdt.setText("123456")
 
         viewDataBinding.loginBtn.setOnClickListener {
             if (isValid) {
