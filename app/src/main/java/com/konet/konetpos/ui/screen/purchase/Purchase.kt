@@ -16,49 +16,27 @@ import com.konet.konetpos.databinding.ActivityMainBinding
 import com.konet.konetpos.databinding.PurchaseBinding
 import com.konet.konetpos.ui.base.BaseActivity
 import com.konet.konetpos.utils.AppUtils
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 
-
+@AndroidEntryPoint
 class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseView {
 
 
-
-    private var isOn: Boolean = false
     private var isValid: Boolean = false
-    private lateinit var binding: PurchaseBinding
     private val purchaseViewModel: PurchaseViewModel by viewModels()
     override fun getBindingVariable(): Int = BR.viewModel;
     override fun getViewModel(): PurchaseViewModel = purchaseViewModel
     override fun getLayoutId() = R.layout.purchase
-    var MerchantName: String = ""
-    var JSaa:String=""
+
+    lateinit var terminalID:String
+
+//    var JSaa: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getViewModel().setView(this)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.purchase)
-
-        // Assign the component to a property in the binding class.
-        binding.setLifecycleOwner(this)
-
-        binding.viewModel = purchaseViewModel
-
-        binding.continueBtn.setOnClickListener {
-            ContinuePayment(binding.amountEdt.text.toString());
-        }
-//        binding.purchaseBtn.setOnClickListener {
-//            val intent = Intent(this, Purchase::class.java)
-//            startActivity(intent)
-//            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
-//        }
-//        binding = DataBindingUtil.setContentView(this, R.layout.purchase)
-//
-//
-//        // Assign the component to a property in the binding class.
-//        binding.setLifecycleOwner(this)
-//
-//        binding.viewModel = purchaseViewModel
-//        getViewModel().setView(this)
     }
 //
 //    var UserDetailsActivity =
@@ -82,6 +60,10 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
 //        }
 
     fun ContinuePayment(amount: String) {
+        if (amount.toInt() < 1) {
+            AppUtils().SnackbarFailed(viewDataBinding.root, "Amount must be more than 0")
+            return
+        }
         val jsonString =
             "{ \"transType\": \"PURCHASE\", \"amount\":\"$amount\",\"print\":\"true\" }"
         try {
@@ -90,7 +72,7 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
             PaymentActivitys.launch(intent)
         } catch (e: Exception) {
 
-            Log.i("ErrorPaymentActivitys",e.message.toString())
+            Log.i("ErrorPaymentActivitys", e.message.toString())
         }
 
     }
@@ -101,50 +83,74 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
                 try {
                     if (result.data!!.hasExtra("data")) {
                         val MapData = AppUtils().getJsonMap(result.data!!, "data");
-
+                        Log.i("fgfdhf",AppUtils().getJsonMap(result.data!!, "data").toString())
+                        terminalID=MapData.get("terminalID").toString()
                         if (MapData.get("statuscode").toString().contentEquals("00")) {
-                            val Merchantheader =
-                                TextField(MerchantName, align = "centre", size = "large", isBold = true)
-                            val Merchantbody = TextField(
-                                text = "Global Accelerex",
-                                align = "right",
-                                size = "normal",
-                                isBold = true
-                            )
+                          val  JSaa = "{\n" +
+                                    "    \"Receipt\": [\n" +
+                                    "        {\n" +
+                                    "            \"Bitmap\": \"${R.drawable.launcher}\",\n" +
+                                    "            \"letterSpacing\": 5,\n" +
+                                    "            \"String\": [\n" +
+                                    "                {\n" +
+                                    "                    \"isMultiline\": false,\n" +
+                                    "                    \"header\": {\n" +
+                                    "                        \"text\": \"Merchant Name\",\n" +
+                                    "                        \"align\": \"le\",\n" +
+                                    "                        \"size\": \"large\",\n" +
+                                    "                        \"isBold\": true\n" +
+                                    "                    },\n" +
+                                    "                    \"body\": {\n" +
+                                    "                        \"text\": \"Konetpay\",\n" +
+                                    "                        \"alignment\": \"centre\",\n" +
+                                    "                        \"size\": \"normal\",\n" +
+                                    "                        \"isBold\": false\n" +
+                                    "                    }\n" +
+                                    "                },\n" +
+                                    "                {\n" +
+                                    "                    \"isMultiline\": false,\n" +
+                                    "                    \"header\": {\n" +
+                                    "                        \"text\": \"Reference Number\",\n" +
+                                    "                        \"align\": \"left\",\n" +
+                                    "                        \"size\": \"large\",\n" +
+                                    "                        \"isBold\": true\n" +
+                                    "                    },\n" +
+                                    "                    \"body\": {\n" +
+                                    "                        \"text\": \"${MapData.get("rrn").toString()}\",\n" +
+                                    "                        \"alignment\": \"centre\",\n" +
+                                    "                        \"size\": \"normal\",\n" +
+                                    "                        \"isBold\": false\n" +
+                                    "                    }\n" +
+                                    "                },\n" +
+                                    "                {\n" +
+                                    "                    \"isMultiline\": false,\n" +
+                                    "                    \"header\": {\n" +
+                                    "                        \"text\": \"Amount\",\n" +
+                                    "                        \"align\": \"left\",\n" +
+                                    "                        \"size\": \"large\",\n" +
+                                    "                        \"isBold\": true\n" +
+                                    "                    },\n" +
+                                    "                    \"body\": {\n" +
+                                    "                        \"text\": \"${MapData.get("amount").toString()}\",\n" +
+                                    "                        \"alignment\": \"centre\",\n" +
+                                    "                        \"size\": \"large\",\n" +
+                                    "                        \"isBold\": false\n" +
+                                    "                    }\n" +
+                                    "                }\n" +
+                                    "            ]\n" +
+                                    "        }\n" +
+                                    "    ]\n" +
+                                    "}"
 
-                            val ReferenceNumberheader =
-                                TextField(MerchantName, align = "centre", size = "large", isBold = true)
-                            val ReferenceNumberbody = TextField(
-                                text = "Reference Number",
-                                align = "right",
-                                size = "normal",
-                                isBold = false
-                            )
+//                            Log.i("utilityppppp", JSaa)
 
-                            val stringField = listOf(
-                                StringField(true, Merchantheader, Merchantbody),
-                                StringField(true, ReferenceNumberheader, ReferenceNumberbody)
-                            )
-                            val printField = listOf(PrintField("filename", 5, stringField))
-                            val buyGiftcardRequest = PrintObject(
-                                printFields = printField
-                            )
-
-                            val jsonString = buyGiftcardRequest.toString()
-
-                            Snackbar.make(
-                                binding.root,
-                                "Yes print",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                            Log.i("utilityppppp", jsonString)
                             val intent = Intent("com.globalaccelerex.printer")
                             intent.putExtra("jsonData", JSaa)
                             PrintActivitys.launch(intent)
 
                         } else {
                             Snackbar.make(
-                                binding.root,
+                                viewDataBinding.root,
                                 MapData.get("message").toString().toString(),
                                 Snackbar.LENGTH_LONG
                             ).show()
@@ -166,7 +172,7 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
                 startActivity(intent)
                 overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
                 Snackbar.make(
-                    binding.root,
+                    viewDataBinding.root,
                     "Transaction successful",
                     Snackbar.LENGTH_LONG
                 ).show()
@@ -190,94 +196,41 @@ class Purchase : BaseActivity<PurchaseBinding, PurchaseViewModel>(), PurchaseVie
 //        } catch (e: Exception) {
 //            Log.i("ErrorUserDetailsActivit",e.message.toString())
 //        }
-
-        validateButtonLogin()
-        try {
-             JSaa="{\n" +
-                    "    \"Receipt\": [{\n" +
-                    "    \"Bitmap\": \"filename\",\n" +
-                    "    \"letterSpacing\": 5,\n" +
-                    "    \"String\": [{\n" +
-                    "    \"isMultiline\": true,\n" +
-                    "    \"header\": {\n" +
-                    "    \"text\": \"Merchant Name\",\n" +
-                    "    \"align\": \"centre\",\n" +
-                    "    \"size\": \"large\",\n" +
-                    "    \"isBold\": true\n" +
-                    "}, \"body\": {\n" +
-                    "    \"text\": \"Global Accelerex\",\n" +
-                    "    \"alignment\": \"centre\",\n" +
-                    "    \"size\": \"normal\",\n" +
-                    "    \"isBold\": false\n" +
-                    "} },\n" +
-                    "    {\n" +
-                    "        \"isMultiline\": false,\n" +
-                    "        \"header\": {\n" +
-                    "        \"text\": \"Reference Number\",\n" +
-                    "        \"align\": \"left\",\n" +
-                    "        \"size\": \"large\",\n" +
-                    "        \"isBold\": true\n" +
-                    "    }, \"body\": {\n" +
-                    "        \"text\": \"123456789\"\n" +
-                    "    }\n" +
-                    "    } ]\n" +
-                    "}, {\n" +
-                    "    \"Bitmap\": \"filename\",\n" +
-                    "    \"letterSpacing\": 5,\n" +
-                    "    \"String\": [{\n" +
-                    "    \"isMultiline\": true,\n" +
-                    "    \"header\": {\n" +
-                    "    \"text\": \"Merchant Name\",\n" +
-                    "    \"align\": \"centre\",\n" +
-                    "    \"size\": \"large\",\n" +
-                    "    \"isBold\": true\n" +
-                    "}, \"body\": {\n" +
-                    "    \"text\": \"Allen Tobi\",\n" +
-                    "    \"alignment\": \"centre\",\n" +
-                    "    \"size\": \"normal\",\n" +
-                    "    \"isBold\": false\n" +
-                    "} },\n" +
-                    "    {\n" +
-                    "        \"isMultiline\": false,\n" +
-                    "        \"header\": {\n" +
-                    "        \"text\": \"Reference Number\",\n" +
-                    "        \"align\": \"left\",\n" +
-                    "        \"size\": \"large\",\n" +
-                    "        \"isBold\": true\n" +
-                    "    }, \"body\": {\n" +
-                    "        \"text\": \"abcd1234\"\n" +
-                    "    }\n" +
-                    "    } ]\n" +
-                    "} ]\n" +
-                    "}\n" +
-                    "        "
-        } catch (e: Exception) {
-            Log.i("ErrorrJasname",e.message.toString())
+        viewDataBinding.continueBtn.setOnClickListener {
+            ContinuePayment(viewDataBinding.amountEdt.text.toString());
         }
+        validateButtonPurchase()
+
     }
 
     override fun screenBack() {
     }
 
     @SuppressLint("CheckResult")
-    private fun validateButtonLogin() {
+    private fun validateButtonPurchase() {
         try {
-            val amountEdtObservable = RxTextView.textChanges(binding.amountEdt)
-            val amountEdtObservabl = RxTextView.textChanges(binding.amountEdt)
+            val amountEdtObservable = RxTextView.textChanges(viewDataBinding.amountEdt)
+            val amountEdtObservabl = RxTextView.textChanges(viewDataBinding.amountEdt)
             val isSignInEnabled: Observable<Boolean> = Observable.combineLatest(
-                amountEdtObservable,amountEdtObservabl,
-                { amount,am ->
+                amountEdtObservable, amountEdtObservabl,
+                { amount, am ->
                     amount.isNotEmpty()
                 })
 
             isSignInEnabled.subscribe {
                 isValid = it
-                if (it) {
-                    binding.continueBtn.background =
-                        ContextCompat.getDrawable(applicationContext, R.drawable.rounded_button_selector)
+                if (it && viewDataBinding.amountEdt.text.toString().toInt()>0) {
+                    viewDataBinding.continueBtn.background =
+                        ContextCompat.getDrawable(
+                            applicationContext,
+                            R.drawable.rounded_button_selector
+                        )
                 } else {
-                    binding.continueBtn.background =
-                        ContextCompat.getDrawable(applicationContext, R.drawable.button_round_light_blue)
+                    viewDataBinding.continueBtn.background =
+                        ContextCompat.getDrawable(
+                            applicationContext,
+                            R.drawable.button_round_light_blue
+                        )
                 }
             }
         } catch (e: Exception) {

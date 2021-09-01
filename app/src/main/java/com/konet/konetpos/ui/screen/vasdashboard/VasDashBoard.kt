@@ -22,6 +22,7 @@ class VasDashBoard : BaseActivity<VasbashboardBinding, VasDashBoardViewModel>(),
         super.onCreate(savedInstanceState)
         getViewModel().setView(this)
 
+
     }
 
     override fun onErrorAfterDialogDismiss(error: Throwable, option: Any?) {

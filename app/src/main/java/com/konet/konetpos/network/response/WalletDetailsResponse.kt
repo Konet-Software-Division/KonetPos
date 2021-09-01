@@ -12,5 +12,7 @@ data class WalletDetailsResponse(
 
 @Parcelize
 data class WalletDetails(
-    @SerializedName("id") val data: String
+    @SerializedName("user") val user: String,
+    @SerializedName("available_balance") val available_balance: String
+
 ) : Parcelable

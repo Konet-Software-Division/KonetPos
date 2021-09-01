@@ -6,7 +6,7 @@
     <application
         android:name="com.konet.konetpos.KonetposApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -20,6 +20,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.PAY_APP" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name="com.konet.konetpos.ui.screen.purchase.Purchase"

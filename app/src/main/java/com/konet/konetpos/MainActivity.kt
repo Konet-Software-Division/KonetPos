@@ -46,6 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
             startActivity(intent)
             overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
         }
+        viewDataBinding.vasBtn.visibility=View.GONE
         viewDataBinding.vasBtn.setOnClickListener {
             if (hawkHelper.getLoggedin()) {
                 val intent = Intent(this, VasDashBoard::class.java)

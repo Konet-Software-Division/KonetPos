@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.konet.konetpos.domain.usecase.LoginUseCase
 import com.konet.konetpos.network.request.LoginRequest
+import com.konet.konetpos.network.response.WalletDetails
+import com.konet.konetpos.network.response.WalletDetailsResponse
 import com.konet.konetpos.ui.base.BaseViewModel
 import com.konet.konetpos.utils.HawkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,12 +39,13 @@ class LoginViewModel @Inject constructor(
             is LoginUseCase.Result.Loading -> {
                 getView()?.showProgressDialog(true)
             }
+
             is LoginUseCase.Result.Success -> {
                 getView()?.showProgressDialog(false)
-                hawkHelper.setToken(result.response.data.user.token)
-//                hawkHelper.setRefreshToken(result.response.refreshToken)
+                hawkHelper.setLoggedin(true)
                 getView()?.loginSuccess()
             }
+
             is LoginUseCase.Result.Failure -> {
                 Timber.e(result.throwable)
                 Log.i("PPPPPPPP",result.throwable.message.toString())

@@ -16,7 +16,7 @@ interface API {
     @POST("users_service/api/v1/auth/login")
     suspend fun signIn(@Body request: LoginRequest): Response<LoginResponse>
 
-    @GET("token")
+    @GET("wallet_service/api/v1/wallets")
     suspend fun walletDetails(): Response<WalletDetailsResponse>
 
 

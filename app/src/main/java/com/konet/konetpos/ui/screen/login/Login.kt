@@ -80,13 +80,13 @@ class Login : BaseActivity<LoginBinding, LoginViewModel>(), LoginView {
                 )
             }
         }
-
     }
 
     override fun loginSuccess() {
         val intent = Intent(this, VasDashBoard::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out)
+        finish()
     }
 
     override fun loginFailed(mess: String) {

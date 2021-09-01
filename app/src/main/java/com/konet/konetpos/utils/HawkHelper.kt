@@ -8,7 +8,6 @@ class HawkHelper {
     companion object {
         private const val LOGGEDIN = "loggedin"
         private const val TOKEN = "token"
-        private const val REFRESH_TOKEN = "refresh_token"
         private const val USER_DETAIL = "user_detail"
     }
 
