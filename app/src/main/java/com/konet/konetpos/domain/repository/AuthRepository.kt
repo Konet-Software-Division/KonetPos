@@ -9,7 +9,7 @@ interface AuthRepository {
 
     suspend fun signIn(request: LoginRequest): LoginResponse
 
-//    suspend fun refreshToken(refresh_token: String): LoginResponse
+    suspend fun billerCategories(): LoginResponse
 
     suspend fun getAccountDetails(): WalletDetailsResponse
 

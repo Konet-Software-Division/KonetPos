@@ -2,6 +2,7 @@ package com.konet.konetpos.network.remote
 
 
 import com.konet.konetpos.network.request.LoginRequest
+import com.konet.konetpos.network.response.BillerCategoriesResponse
 import com.konet.konetpos.network.response.LoginResponse
 import com.konet.konetpos.network.response.WalletDetailsResponse
 
@@ -19,6 +20,8 @@ interface API {
     @GET("wallet_service/api/v1/wallets")
     suspend fun walletDetails(): Response<WalletDetailsResponse>
 
+    @GET("wallet_service/api/v1/billers/categories'")
+    suspend fun billerCategories(): Response<BillerCategoriesResponse>
 
 }
 
