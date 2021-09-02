@@ -5,6 +5,7 @@ import com.konet.konetpos.network.SafeApiRequest
 
 import com.konet.konetpos.network.request.LoginRequest
 import com.konet.konetpos.network.response.BillerCategoriesResponse
+import com.konet.konetpos.network.response.BillerListResponse
 import com.konet.konetpos.network.response.WalletDetailsResponse
 import javax.inject.Inject
 
@@ -20,6 +21,10 @@ class ApiHelperImpl @Inject constructor(private val api: API) : ApiHelper, SafeA
 
     override suspend fun billerCategories(): BillerCategoriesResponse {
         return apiRequest { api.billerCategories() }
+    }
+
+    override suspend fun BillerList(catID:Int): BillerListResponse {
+        return apiRequest { api.BillerList(catID) }
     }
 
 }
