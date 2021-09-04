@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.konet.konetpos.ui.screen.billerlist.BillerListViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_grey">
+
+
+        <TextView
+            android:id="@+id/amountTxtView"
+            style="@style/heebo_medium_19"
+            android:text="@string/account_balance"
+            android:textSize="@dimen/_13sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:letterSpacing="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/amountTxt"
+            style="@style/heebo_medium_19"
+            android:text="@{viewModel.accountBalance}"
+            android:textSize="@dimen/_13sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:letterSpacing="0.1"
+            app:layout_constraintStart_toEndOf="@id/amountTxtView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

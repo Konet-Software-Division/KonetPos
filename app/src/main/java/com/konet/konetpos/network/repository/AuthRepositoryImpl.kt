@@ -27,7 +27,7 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun getAccountDetails(): WalletDetailsResponse {
-        return apiHelper.getAccountDetails()
+        return apiHelper.walletdetails()
     }
 
 

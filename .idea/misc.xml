@@ -12,7 +12,9 @@
         <entry key="app/src/main/res/font/poppins_light.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/font/poppins_medium.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/billerlist.xml" value="0.14322916666666666" />
         <entry key="app/src/main/res/layout/dialog_loading_progress.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/item_buy_gift_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/login.xml" value="0.34424242424242424" />
         <entry key="app/src/main/res/layout/login_frag.xml" value="0.1796875" />
         <entry key="app/src/main/res/layout/purchase.xml" value="0.15208333333333332" />

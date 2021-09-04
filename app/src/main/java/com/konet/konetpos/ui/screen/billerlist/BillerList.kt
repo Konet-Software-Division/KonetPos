@@ -1,19 +1,20 @@
-package com.konet.konetpos.ui.screen.vasdashboard
+package com.konet.konetpos.ui.screen.billerlist
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.konet.konetpos.BR
 import com.konet.konetpos.R
 import com.konet.konetpos.ui.base.BaseActivity
-import com.konet.konetpos.databinding.VasbashboardBinding
+import com.konet.konetpos.databinding.BillerlistBinding
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class VasDashBoard : BaseActivity<VasbashboardBinding, VasDashBoardViewModel>(), VasDashBoardView {
+class BillerList : BaseActivity<BillerlistBinding, BillerListViewModel>(), BillerListView {
 
-    private val vasDashBoardViewModel: VasDashBoardViewModel by viewModels()
-    override fun getViewModel(): VasDashBoardViewModel = vasDashBoardViewModel
-    override fun getLayoutId() = R.layout.vasbashboard
+    private val billerListViewModel: BillerListViewModel by viewModels()
+    override fun getViewModel(): BillerListViewModel = billerListViewModel
+    override fun getLayoutId() = R.layout.billerlist
     override fun getBindingVariable():Int = BR.viewModel;
 
 

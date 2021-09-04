@@ -23,8 +23,8 @@ class ApiHelperImpl @Inject constructor(private val api: API) : ApiHelper, SafeA
         return apiRequest { api.billerCategories() }
     }
 
-    override suspend fun BillerList(catID:Int): BillerListResponse {
-        return apiRequest { api.BillerList(catID) }
+    override suspend fun billerList(catID:Int): BillerListResponse {
+        return apiRequest { api.billerList(catID) }
     }
 
 }

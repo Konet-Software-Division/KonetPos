@@ -23,7 +23,7 @@ interface API {
     suspend fun billerCategories(): Response<BillerCategoriesResponse>
 
     @PATCH("/wallet_service/api/v1/billers/{CATEGORY_ID}/list")
-    suspend fun BillerList(@Path("CATEGORY_ID") id: Int?): Response<BillerListResponse>
+    suspend fun billerList(@Path("CATEGORY_ID") id: Int?): Response<BillerListResponse>
 
 }
 

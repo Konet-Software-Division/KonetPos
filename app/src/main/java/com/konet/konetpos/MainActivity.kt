@@ -23,7 +23,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
     @Inject
     lateinit var hawkHelper: HawkHelper
 
-    private lateinit var binding: ActivityMainBinding
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
     override fun getBindingVariable():Int = BR.viewModel;
     override fun getViewModel(): MainActivityViewModel = mainActivityViewModel
