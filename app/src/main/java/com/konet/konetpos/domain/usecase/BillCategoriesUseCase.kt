@@ -19,7 +19,7 @@ class BillCategoryUseCase @Inject constructor(
         data class Failure(val throwable: Throwable) : Result()
     }
 
-    suspend fun execute(request: LoginRequest): Result {
+    suspend fun execute(): Result {
         return try {
             //refresh token
             val billerCategoriesResponse = authRepository.billerCategories()
